@@ -21,8 +21,8 @@ class MetronomeContainer extends Component {
     return (
       <div>
         <h1>Metronome</h1>
-        <Beeper isPlaying={this.isPlaying}/>
         <button onClick={this.updatePlayState}>PlayPause</button>
+        <Beeper isPlaying={this.state.isPlaying}/>
       </div>
     )
   }
