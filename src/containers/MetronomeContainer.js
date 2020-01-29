@@ -12,7 +12,10 @@ class MetronomeContainer extends Component {
         intervalId: null
     }
     this.updatePlayState = this.updatePlayState.bind(this)
-    this.updateIntervalId = this.updateIntervalId.bind(this)
+    this.setIntervalId = this.setIntervalId.bind(this)
+    this.clearIntervalId = this.clearIntervalId.bind(this)
+    this.startPlaying = this.startPlaying.bind(this)
+    this.stopPlaying = this.stopPlaying.bind(this)
     this.updateBpm = this.updateBpm.bind(this)
   }
 
@@ -20,14 +23,29 @@ class MetronomeContainer extends Component {
     this.setState({isPlaying: !this.state.isPlaying})
   }
 
-  updateIntervalId(newId) {
+  startPlaying() {
+    this.setState({isPlaying: true})
+  }
+
+  stopPlaying() {
+    this.setState({isPlaying: false})
+  }
+
+  setIntervalId(newId) {
     this.setState({intervalId: newId})
+  }
+
+  clearIntervalId() {
+    this.setState({intervalId: null});
   }
 
   updateBpm(newBpm) {
     this.setState({bpm: newBpm})
+    if (this.state.isPlaying && this.state.intervalId) {
+      this.stopPlaying();
+      setTimeout(this.startPlaying);
+    }
   }
-
 
   render() {
     return (
@@ -37,7 +55,8 @@ class MetronomeContainer extends Component {
         <Beeper
           isPlaying={this.state.isPlaying}
           intervalId={this.state.intervalId}
-          updateIntervalId={this.updateIntervalId}
+          setIntervalId={this.setIntervalId}
+          clearIntervalId={this.clearIntervalId}
           currentBpm={this.state.bpm}
         />
         <Slider

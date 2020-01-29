@@ -2,13 +2,13 @@ import React from 'react';
 
 const Beeper = (props) => {
 
-      if (props.isPlaying && !props.intervalId) {
-        props.updateIntervalId(beepOnInterval())
-      }
+    if (props.isPlaying && !props.intervalId) {
+      startBeeping()
+    }
 
-      if(!props.isPlaying && props.intervalId) {
-        stopBeeping(props.intervalId)
-      }
+    if(!props.isPlaying && props.intervalId) {
+      stopBeeping()
+    }
 
 
     function beep() {
@@ -16,18 +16,25 @@ const Beeper = (props) => {
       snd.play();
     }
 
-    function beepOnInterval() {
+    function setBeepInterval() {
       return setInterval( () => beep(), 60000 / props.currentBpm)
     }
 
-    function stopBeeping(id) {
-      clearInterval(id)
-      props.updateIntervalId(null)
+    function clearBeepInterval() {
+      clearInterval(props.intervalId)
     }
 
-    return (
-      null
-  )
+    function startBeeping() {
+      const intervalId = setBeepInterval();
+      props.setIntervalId(intervalId)
+    }
+
+    function stopBeeping() {
+      clearBeepInterval()
+      props.clearIntervalId()
+    }
+
+    return null
 }
 
 export default Beeper;
