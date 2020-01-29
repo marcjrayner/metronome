@@ -1,20 +1,28 @@
 import React, {Component} from 'react';
-import PlayPause from '../components/PlayPause'
+import Beeper from '../components/Beeper'
 
 class MetronomeContainer extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+        isPlaying: false,
         bpm: 60
     }
+    this.updatePlayState = this.updatePlayState.bind(this)
   }
+
+  updatePlayState() {
+    this.setState({isPlaying: !this.state.isPlaying})
+  }
+
 
   render() {
     return (
       <div>
         <h1>Metronome</h1>
-        <PlayPause bpm={this.bpm}/>
+        <Beeper isPlaying={this.isPlaying}/>
+        <button onClick={this.updatePlayState}>PlayPause</button>
       </div>
     )
   }
