@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Beeper from '../components/Beeper'
+import Slider from '../components/Slider'
 
 class MetronomeContainer extends Component {
 
@@ -7,13 +8,19 @@ class MetronomeContainer extends Component {
     super(props);
     this.state = {
         isPlaying: false,
-        bpm: 60
+        bpm: 60,
+        intervalId: null
     }
     this.updatePlayState = this.updatePlayState.bind(this)
+    this.updateIntervalId = this.updateIntervalId.bind(this)
   }
 
   updatePlayState() {
     this.setState({isPlaying: !this.state.isPlaying})
+  }
+
+  updateIntervalId(newId) {
+    this.setState({intervalId: newId})
   }
 
 
@@ -22,7 +29,12 @@ class MetronomeContainer extends Component {
       <div>
         <h1>Metronome</h1>
         <button onClick={this.updatePlayState}>PlayPause</button>
-        <Beeper isPlaying={this.state.isPlaying}/>
+        <Beeper
+          isPlaying={this.state.isPlaying}
+          intervalId={this.state.intervalId}
+          updateIntervalId={this.updateIntervalId}
+        />
+        <Slider />
       </div>
     )
   }
