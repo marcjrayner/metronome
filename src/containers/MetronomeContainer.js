@@ -13,6 +13,7 @@ class MetronomeContainer extends Component {
     }
     this.updatePlayState = this.updatePlayState.bind(this)
     this.updateIntervalId = this.updateIntervalId.bind(this)
+    this.updateBpm = this.updateBpm.bind(this)
   }
 
   updatePlayState() {
@@ -21,6 +22,10 @@ class MetronomeContainer extends Component {
 
   updateIntervalId(newId) {
     this.setState({intervalId: newId})
+  }
+
+  updateBpm(newBpm) {
+    this.setState({bpm: newBpm})
   }
 
 
@@ -34,7 +39,10 @@ class MetronomeContainer extends Component {
           intervalId={this.state.intervalId}
           updateIntervalId={this.updateIntervalId}
         />
-        <Slider />
+        <Slider
+          currentBpm={this.state.bpm}
+          updateBpm={this.updateBpm}
+        />
       </div>
     )
   }
