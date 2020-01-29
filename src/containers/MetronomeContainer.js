@@ -38,9 +38,9 @@ class MetronomeContainer extends Component {
           isPlaying={this.state.isPlaying}
           intervalId={this.state.intervalId}
           updateIntervalId={this.updateIntervalId}
+          currentBpm={this.state.bpm}
         />
         <Slider
-          currentBpm={this.state.bpm}
           updateBpm={this.updateBpm}
         />
       </div>

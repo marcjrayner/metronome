@@ -17,7 +17,7 @@ const Beeper = (props) => {
     }
 
     function beepOnInterval() {
-      return setInterval( () => beep(), 1000 )
+      return setInterval( () => beep(), 60000 / props.currentBpm)
     }
 
     function stopBeeping(id) {
