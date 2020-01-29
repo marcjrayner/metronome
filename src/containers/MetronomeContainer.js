@@ -51,6 +51,7 @@ class MetronomeContainer extends Component {
     return (
       <div>
         <h1>Metronome</h1>
+        <h2>{this.state.bpm} BPM</h2>
         <button onClick={this.updatePlayState}>PlayPause</button>
         <Beeper
           isPlaying={this.state.isPlaying}
@@ -62,6 +63,7 @@ class MetronomeContainer extends Component {
         <Slider
           updateBpm={this.updateBpm}
         />
+
       </div>
     )
   }
