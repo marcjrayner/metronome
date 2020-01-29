@@ -4,10 +4,14 @@ class PlayPause extends Component {
 
   constructor(props) {
     super(props);
-    this.state = null
+    this.state = {
+      interval: 1000,
+      intervalID: null,
+      isPlaying: false
+    }
 
     this.beep = this.beep.bind(this);
-    this.beepOnInterval = this.beepOnInterval.bind(this);
+    this.playPause = this.playPause.bind(this);
   }
 
    beep() {
@@ -15,15 +19,29 @@ class PlayPause extends Component {
       snd.play();
     }
 
+
+    playPause() {
+      this.isPlaying = !this.isPlaying
+      if (this.isPlaying) {
+        this.beepOnInterval()
+      } else {
+        this.stopBeeping()
+      }
+    }
+
     beepOnInterval() {
-       setInterval( () => this.beep(), 1000 )
+      this.state.intervalID = setInterval( () => this.beep(), this.state.interval )
+    }
+
+    stopBeeping() {
+      clearInterval(this.state.intervalID)
     }
 
 
     render() {
       return (
         <div>
-          <button onClick={this.beepOnInterval}>PlayPause</button>
+          <button onClick={this.playPause}>PlayPause</button>
         </div>
       )
     }
